@@ -34,5 +34,10 @@
   ],
   "options_ui": {
     "page": "options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "r_anime_enhanced@reddit.com"
+    }
   }
 }
