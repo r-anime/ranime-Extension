@@ -1,0 +1,41 @@
+{
+  "description": "Add functionalities to r/anime",
+  "manifest_version": 3,
+  "name": "r/anime Enhanced",
+  "version": "2.0.0",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://shit-taste.net/api/*",
+    "https://graphql.anilist.co/*"
+  ],
+  "homepage_url": "https://github.com/r-anime/ranime-Extension",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/r/anime/*",
+        "*://*.reddit.com/r/manga/*",
+        "*://*.reddit.com/r/AnimeImpressions/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "enhance.js"
+      ],
+      "css": [
+        "enhance.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "r_anime_enhanced@reddit.com"
+    }
+  }
+}
