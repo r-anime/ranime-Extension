@@ -107,7 +107,6 @@ function createMenu(cf, as, sp) {
   }
   if (sp) {
     menu += '<div class="tabwrapper formattabwrapper">';
-    menu += '<a class="addSpoiler oldspoiler">Old Spoiler</a>';
     menu += '<a class="addSpoiler newspoiler">New Spoiler</a>';
     menu += '</div>';
   }
@@ -453,30 +452,14 @@ function setUpAniListSearch(innerform) {
 
 function setUpFormat(innerform) {
   innerform.children(".formattabwrapper").children(".addSpoiler").click(function (e) {
-
     e.preventDefault;
-
-    var ver = "old";
-    if ($(this)[0].classList.contains("newspoiler")) {
-      ver = "new";
-    }
 
     var txtarea = $(this).parents(".formattabwrapper").parents(".commentfaces").parents(".md").siblings(".usertext-edit").children(".md").children("textarea");
     var start = txtarea[0].selectionStart;
     var finish = txtarea[0].selectionEnd;
     var sel = txtarea[0].value.substring(start, finish);
 
-    if (ver == "old") {
-      if (sel !== "")
-        var output = '[](/s "' + sel + '")';
-      else
-        var output = '[]()';
-    } else {
-      if (sel !== "")
-        var output = '>!' + sel + '!<';
-      else
-        var output = '>!!<';
-    }
+    const output = `[] >!${sel}!<`;
 
     var formfieldbefore = txtarea.val().substr(0, start);
     var formfieldafter = txtarea.val().substr(finish, txtarea.val().length)
