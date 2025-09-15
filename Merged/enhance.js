@@ -145,9 +145,6 @@ async function main() {
 
       form.prepend(menu);
       createCommentfacefield(form);
-
-      const innerform = $(form).children('.ranimeenhanced').children('.commentfaces');
-      initializeTabs();
     });
   }
 
