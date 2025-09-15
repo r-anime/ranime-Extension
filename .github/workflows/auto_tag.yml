@@ -6,14 +6,31 @@ on:
       - master
 
 jobs:
-  build:
+  tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: butlerlogic/action-autotag@1.1.2
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        with:
-          strategy: regex # Optional since regex_pattern is defined
-          root: "Merged/manifest.json"
-          regex_pattern: "\"version\": \"([0-9\\.]+)\""
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Read version from manifest.json
+        id: get_version
+        run: |
+          version=$(jq -r '.version' Merged/manifest.json)
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git rev-parse "$version" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create tag if missing
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$version" -m "Release $version"
+          git push origin "$version"
