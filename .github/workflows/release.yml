@@ -47,7 +47,6 @@ jobs:
 
       - name: Create Github release
         id: release
-        if: steps.check_tag.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
