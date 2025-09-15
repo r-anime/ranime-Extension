@@ -1,0 +1,60 @@
+name: Release Extensions
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Package Chrome extension
+        run: |
+          mkdir -p dist
+          zip -r dist/Chrome.zip ./Merged
+
+      - name: Package Firefox extension
+        run: |
+          mkdir -p dist
+          zip -r dist/Firefox.zip ./Merged/*
+
+      - name: Upload Chrome artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Chrome
+          path: dist/Chrome.zip
+
+      - name: Upload Firefox artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Firefox
+          path: dist/Firefox.zip
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download Chrome artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: Chrome
+          path: dist
+
+      - name: Download Firefox artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: Firefox
+          path: dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
