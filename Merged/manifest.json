@@ -2,12 +2,11 @@
   "description": "Add functionalities to r/anime",
   "manifest_version": 3,
   "name": "r/anime Enhanced",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "permissions": [
     "storage"
   ],
   "host_permissions": [
-    "https://shit-taste.net/api/*",
     "https://graphql.anilist.co/*"
   ],
   "homepage_url": "https://github.com/r-anime/ranime-Extension",
@@ -25,6 +24,7 @@
         "jquery-3.3.1.min.js",
         "enhance.js"
       ],
+      "type": "module",
       "css": [
         "enhance.css"
       ]
