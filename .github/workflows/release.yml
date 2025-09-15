@@ -9,8 +9,8 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     outputs:
-      tag_already_exists: ${{ !steps.check_tag.outputs.exists }}
-      tag_version: ${{ !steps.check_tag.outputs.version }}
+      tag_already_exists: ${{ steps.check_tag.outputs.exists }}
+      tag_version: ${{ steps.check_tag.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
