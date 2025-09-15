@@ -1,0 +1,151 @@
+.ranimeenhanced input {
+    padding: 4px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: grey;
+    margin-left: 6px;
+}
+
+.showallcommentfaces, .showrecentcommentfaces, .showrecentfavouritefaces, .addSpoiler {
+    border-radius: 5px;
+    padding: 4px;
+    border: 2px solid lightgrey;
+    cursor: default;
+    color: grey !important;
+}
+
+.showallcommentfaces:hover, .showrecentcommentfaces:hover, .showrecentfavouritefaces:hover, .addSpoiler:hover {
+    color: darkgrey !important;
+}
+
+.addSpoiler, .stab {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 30px;
+}
+
+.commentfaces .stab {
+    padding: 5px 15px;
+    background: white;
+    color: grey !important;
+    cursor: default;
+    line-height: 40px;
+    margin-left: 6px;
+    border: 1px solid lightgrey;
+}
+
+.commentfaces .stab:hover {
+    color: darkgrey !important;
+}
+
+.res-nightmode .commentfaces .stab {
+    background: #999;
+    color: black !important;
+}
+
+.res-nightmode .commentfaces .stab:hover {
+    color: lightgrey !important;
+}
+
+.stabactive {
+    background: bisque;
+}
+
+.tabwrapper {
+    display: none;
+}
+
+.showrecentfavouritefaces {
+    color: red !important;
+}
+
+.commentfacetext {
+    border: 2px dashed lightgrey;
+    width: 90px;
+}
+
+.commentfacesearch, .anilist {
+    border: 2px solid lightgrey;
+}
+
+.commentfacewrapper {
+    height: 250px;
+    display: none;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.commentfacecontainer {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    box-sizing: content-box;
+}
+
+.addCommentface {
+    display: inline-block !important;
+    position: relative !important;
+    overflow: initial !important;
+    text-align: center !important;
+    font-family: arial, sans-serif !important;
+    font-size: 18px !important;
+    color: white !important;
+    text-shadow: 1px 1px #000, 1px -1px #000, -1px 1px #000, -1px -1px #000, 0 1px #000, 0 -1px #000, 1px 0 #000, -1px 0 #000 !important;
+    cursor: default !important;
+    vertical-align: bottom !important;
+}
+
+.anilistsearchimg {
+    width: 80px;
+}
+
+.browseAniListtable {
+    width: 100%;
+}
+
+.browseAniListtable tr:nth-child(even) {
+    background: MistyRose;
+}
+
+.browseAniListtable tr:nth-child(odd) {
+    background: SeaShell;
+}
+
+.res-nightmode .browseAniListtable tr:nth-child(even) {
+    background: SlateGray;
+}
+
+.res-nightmode .browseAniListtable tr:nth-child(odd) {
+    background: DarkSlateGray;
+}
+
+.browseAniListtable td {
+    text-align: center;
+}
+
+.modal-dialog {
+    margin-top: 0 !important;
+}
+
+.browseAniListtable tr:hover .anilistsearchimg {
+    filter: brightness(110%);
+    border: 5px dotted red;
+}
+
+.anilistsearchimg {
+    cursor: pointer;
+    border: 5px solid rgba(0, 0, 0, 0);
+    /* box-shadow: 0 5px 20px rgba(255, 255, 255, 1); */
+}
+
+.browseAniListtable tr .anilistsearchimg:hover {
+    filter: brightness(120%);
+    border: 5px solid red;
+}
+
+.spoiler-text-tooltip {
+    display: none !important;
+}
