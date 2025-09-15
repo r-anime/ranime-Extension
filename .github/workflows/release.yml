@@ -1,4 +1,4 @@
-name: Release Extensions
+name: Release Extension
 
 on:
   push:
@@ -81,3 +81,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release upload ${{needs.tag.outputs.tag_version}} dist/Firefox.zip
+
+  debug:
+    runs-on: ubuntu-latest
+    needs: tag
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: echo version
+        run: |
+          echo "version: ${{needs.tag.outputs.tag_version}}"
