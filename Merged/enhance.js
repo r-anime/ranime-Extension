@@ -22,7 +22,7 @@ async function main() {
   const subPrefix = subPrefixes[sub];
   const invalidFaces = invalidFacesMap[sub];
 
-  const cssUrl = Array.from(document.styleSheets).find((css) => css.href.includes('thumbs.redditmedia.com')).href;
+  const cssUrl = Array.from(document.styleSheets).find((css) => css?.href?.includes('thumbs.redditmedia.com')).href;
 
   async function fetchAndParseCommentFaces(link) {
     const resp = await fetch(link).then((resp) => resp.text());
