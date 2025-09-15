@@ -1,0 +1,19 @@
+name: Auto Tag
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: butlerlogic/action-autotag@stable
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          strategy: regex # Optional since regex_pattern is defined
+          root: "Merged/manifest.json"
+          regex_pattern: "\"version\": \"([0-9\.]+)\""
