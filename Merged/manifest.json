@@ -1,8 +1,8 @@
 {
   "description": "Add functionalities to r/anime",
   "manifest_version": 3,
-  "name": "r/anime Enhanced",
-  "version": "3.1.0",
+  "name": "r/anime Enhanced 2.0",
+  "version": "3.2.0",
   "permissions": [
     "storage"
   ],
@@ -11,7 +11,22 @@
   ],
   "homepage_url": "https://github.com/r-anime/ranime-Extension",
   "icons": {
-    "48": "icons/border-48.png"
+    "16": "icons/Snoo_square_icon_16.png",
+    "32": "icons/Snoo_square_icon_32.png",
+    "48": "icons/Snoo_square_icon_48.png",
+    "64": "icons/Snoo_square_icon_64.png",
+    "128": "icons/Snoo_square_icon_128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/Snoo_square_icon_16.png",
+      "32": "icons/Snoo_square_icon_32.png",
+      "48": "icons/Snoo_square_icon_48.png",
+      "64": "icons/Snoo_square_icon_64.png",
+      "128": "icons/Snoo_square_icon_128.png"
+    },
+    "default_title": "r/anime Enhanced 2.0",
+    "default_popup": "options.html"
   },
   "content_scripts": [
     {
@@ -26,12 +41,14 @@
       ],
       "type": "module",
       "css": [
-        "enhance.css"
+        "enhance.css",
+        "options.css"
       ]
     }
   ],
   "options_ui": {
-    "page": "options.html"
+    "page": "options.html",
+    "open_in_tab": true
   },
   "browser_specific_settings": {
     "gecko": {
