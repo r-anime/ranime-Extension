@@ -1,9 +1,9 @@
-async function main() {
-  // Use browser.* if available, otherwise fall back to chrome.*
-  if (typeof browser === 'undefined') {
-    var browser = chrome;
-  }
+// Use browser.* if available, otherwise fall back to chrome.*
+if (typeof browser === 'undefined') {
+  var browser = chrome;
+}
 
+async function main() {
   const subPrefixes = {
     anime: '#',
     manga: '//#',
@@ -39,30 +39,12 @@ async function main() {
     // console.log(`Error: ${error}`);
   }
 
-  function onGot(result) {
-    if (result.opcommentfaces !== undefined) {
-      cf = result.opcommentfaces;
-    } else {
-      cf = true;
-    }
-
-    if (result.opanisearch !== undefined) {
-      as = result.opanisearch;
-    } else {
-      as = true;
-    }
-
-    if (result.opspoiler !== undefined) {
-      sp = result.opspoiler;
-    } else {
-      sp = false;
-    }
-
-    if (result.nuspoiler !== undefined) {
-      nsp = result.nuspoiler;
-    } else {
-      nsp = false;
-    }
+  function onGot(options) {
+    options = options.options;
+    const cf = options?.legacy?.enabled && options?.legacy?.subOptions?.commentFaces?.enabled;
+    const as = options?.legacy?.enabled && options?.legacy?.subOptions?.aniSearch?.enabled;
+    const sp = options?.legacy?.enabled && options?.legacy?.subOptions?.spoiler?.enabled;
+    const nsp = options?.legacy?.enabled && options?.legacy?.subOptions?.nuSpoiler?.enabled;
 
     if (nsp) {
       nuSpoilers();
@@ -73,7 +55,7 @@ async function main() {
 
 // Get Option Data from Storage
 
-  const getting = browser.storage.local.get(['opcommentfaces', 'opanisearch', 'opspoiler', 'nuspoiler']);
+  var getting = browser.storage.sync.get("options");
   getting.then(onGot, onError);
 
 // Create Menu
@@ -773,13 +755,13 @@ async function main() {
   */
 
   function nuSpoilers(nsp) {
-    const nuspoiler = document.getElementsByClassName('md-spoiler-text');
+    const nuSpoiler = document.getElementsByClassName('md-spoiler-text');
 
-    for (let i = 0; i < nuspoiler.length; i++) {
-      nuspoiler[i].addEventListener('mouseover', function () {
+    for (let i = 0; i < nuSpoiler.length; i++) {
+      nuSpoiler[i].addEventListener('mouseover', function () {
         this.classList.add('revealed');
       });
-      nuspoiler[i].addEventListener('mouseout', function () {
+      nuSpoiler[i].addEventListener('mouseout', function () {
         this.classList.remove('revealed');
       });
     }

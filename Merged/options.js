@@ -3,50 +3,103 @@ if (typeof browser === 'undefined') {
   var browser = chrome;
 }
 
-function saveOptions(e) {
-  e.preventDefault();
-  browser.storage.local.set({
-    opcommentfaces: document.querySelector('#commentfaces').checked,
-    opanisearch: document.querySelector('#anisearch').checked,
-    opspoiler: document.querySelector('#spoiler').checked,
-    nuspoiler: document.querySelector('#nuspoiler').checked,
+async function main(options) {
+  const optionsForm = document.getElementsByClassName('ranimeenhanced-options')[0].getElementsByTagName('form')[0];
+
+  for (const option of optionsForm.getElementsByClassName('option')) {
+    const input = option.getElementsByTagName('input')[0];
+    const inputs = getSubOptionInputs(option, input);
+
+    const optionData = getOptions(options, input);
+
+    input.checked = optionData.enabled;
+    const subOptionsDom = inputs.map((input) => input.closest('.option'));
+    if (!optionData.enabled) {
+      for (const subOptionDom of subOptionsDom) {
+        subOptionDom.classList.add('disabled');
+        subOptionDom.disabled = true;
+      }
+      for (const i of inputs) {
+        i.disabled = true;
+      }
+    }
+    input.addEventListener('change', (e) => {
+      optionData.enabled = e.target.checked;
+      browser.storage.sync.set({options: options});
+      for (const i of inputs) {
+        i.disabled = !optionData.enabled;
+      }
+
+      if (optionData.enabled) {
+        for (const subOptionDom of subOptionsDom) {
+          subOptionDom.classList.remove('disabled');
+        }
+      } else {
+        for (const subOptionDom of subOptionsDom) {
+          subOptionDom.classList.add('disabled');
+        }
+      }
+    });
+  }
+}
+
+function getOptions(options, current) {
+  const names = [current.name];
+
+  while (current) {
+    if (current.dataset.moduleName && names.at(-1) !== current.dataset.moduleName) {
+      names.push(current.dataset.moduleName);
+    }
+    current = current.parentElement;
+  }
+  names.reverse();
+
+  const last = names.pop();
+  for (const name of names) {
+    if (!(name in options)) {
+      options[name] = {};
+    }
+    options = options[name];
+    if (!('subOptions' in options)) {
+      options.subOptions = {};
+    }
+    options = options.subOptions;
+  }
+  if (!(last in options)) {
+    options[last] = {enabled: false}
+  }
+  return options[last];
+}
+
+function getSubOptionInputs(current, input) {
+  while (current) {
+    if (current.classList.contains('sub-options')) {
+      return [];
+    } else if (current.classList.contains('option-group')) {
+      return Array.from(current.getElementsByTagName('input')).filter(i => i !== input);
+    }
+    current = current.parentElement;
+  }
+  return [];
+}
+
+function domReady() {
+  return new Promise(resolve => {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", resolve);
+    } else {
+      resolve();
+    }
   });
 }
 
-function restoreOptions() {
-  function setCurrentChoice(result) {
-    if (result.opcommentfaces !== undefined) {
-      document.querySelector('#commentfaces').checked = result.opcommentfaces;
-    } else {
-      document.querySelector('#anisearch').checked = true;
-    }
-
-    if (result.opanisearch !== undefined) {
-      document.querySelector('#anisearch').checked = result.opanisearch;
-    } else {
-      document.querySelector('#anisearch').checked = true;
-    }
-
-    if (result.opspoiler !== undefined) {
-      document.querySelector('#spoiler').checked = result.opspoiler;
-    } else {
-      document.querySelector('#spoiler').checked = false;
-    }
-
-    if (result.nuspoiler !== undefined) {
-      document.querySelector('#nuspoiler').checked = result.nuspoiler;
-    } else {
-      document.querySelector('#nuspoiler').checked = false;
-    }
-  }
-
-  function onError(error) {
-    console.log(`Error: ${error}`);
-  }
-
-  const getting = browser.storage.local.get(['opcommentfaces', 'opanisearch', 'opspoiler', 'nuspoiler']);
-  getting.then(setCurrentChoice, onError);
+function loadOptions() {
+  return new Promise(resolve => {
+    browser.storage.sync.get('options', (items) => {
+      resolve(items.options || {});
+    });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector('form').addEventListener('submit', saveOptions);
+const [options] = await Promise.all([loadOptions(), domReady()]);
+main(options);

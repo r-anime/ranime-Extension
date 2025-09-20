@@ -3,34 +3,44 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="options.css">
+  <link rel="icon" type="image/png" href="icons/snoo_square_icon_64.png">
 </head>
 
 <body>
 
-<form>
-  <h2>Modules</h2>
-  <table>
-    <tr>
-      <td>Commentfaces</td>
-      <td><input type="checkbox" id="commentfaces" name="commentfaces" value="commentfaces" checked/></label></td>
-    </tr>
-    <tr>
-      <td>Anime Search</td>
-      <td><input type="checkbox" id="anisearch" name="anisearch" value="anisearch" checkd/></label></td>
-    </tr>
-    <tr>
-      <td>Formatting</td>
-      <td><input type="checkbox" id="spoiler" name="spoiler" value="spoiler"/></label></td>
-    </tr>
-    <tr>
-      <td>New Spoilers like old Spoilers</td>
-      <td><input type="checkbox" id="nuspoiler" name="nuspoiler" value="nuspoiler"/></label></td>
-    </tr>
-  </table>
-  <button type="submit">Save</button>
-</form>
+<div class="ranimeenhanced-options">
+  <form>
+    <h2>Modules</h2>
+    <div class="option-group legacy" data-module-name="legacy">
+      <div class="option">
+        <strong><label for="legacy">Legacy</label></strong>
+        <input type="checkbox" id="legacy" name="legacy"/>
+      </div>
+      <div class="sub-options">
+        <div class="option">
+          <label for="comment-faces">Comment Faces</label>
+          <input type="checkbox" id="comment-faces" name="commentFaces"/>
+        </div>
+        <div class="option">
+          <label for="ani-search">Anime Search</label>
+          <input type="checkbox" id="ani-search" name="aniSearch"/>
+        </div>
+        <div class="option">
+          <label for="spoiler">Formatting</label>
+          <input type="checkbox" id="spoiler" name="spoiler"/>
+        </div>
+        <div class="option">
+          <label for="nu-spoiler">New Spoilers like old Spoilers</label>
+          <input type="checkbox" id="nu-spoiler" name="nuSpoiler"/>
+        </div>
+      </div>
+    </div>
+    <!--    <button type="submit">Save</button>-->
+  </form>
+</div>
 
-<script src="options.js"></script>
+<script type="module" src="options.js"></script>
 
 </body>
 

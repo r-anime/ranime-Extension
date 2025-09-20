@@ -1,0 +1,36 @@
+.ranimeenhanced-options {
+    --indent: 10px;
+    /*width: 700px;*/
+    display: inline-block;
+
+    .option-group {
+        & > .option input {
+            margin-right: var(--indent);
+        }
+
+        .sub-options {
+            margin-left: var(--indent);
+            margin-bottom: 20px;
+        }
+    }
+
+    .option {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
+
+        &.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            color: red;
+        }
+        &.disabled * {
+            cursor: inherit;
+        }
+
+        label {
+            white-space: nowrap;
+        }
+    }
+}
