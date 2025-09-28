@@ -1,8 +1,8 @@
 {
   "description": "Add functionalities to r/anime",
   "manifest_version": 3,
-  "name": "r/anime Enhanced 2.0",
-  "version": "3.2.0",
+  "name": "r/anime Enhanced",
+  "version": "3.3.0",
   "permissions": [
     "storage"
   ],
@@ -25,7 +25,7 @@
       "64": "icons/Snoo_square_icon_64.png",
       "128": "icons/Snoo_square_icon_128.png"
     },
-    "default_title": "r/anime Enhanced 2.0",
+    "default_title": "r/anime Enhanced",
     "default_popup": "options.html"
   },
   "content_scripts": [
