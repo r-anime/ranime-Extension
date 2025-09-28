@@ -2,7 +2,7 @@
   "description": "Add functionalities to r/anime",
   "manifest_version": 3,
   "name": "r/anime Enhanced 2.0",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "permissions": [
     "storage"
   ],
@@ -52,7 +52,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "{ce9bc4ef-8eec-41b1-af5f-714dfd556a74}"
+      "id": "r_anime_enhanced@reddit.com"
     }
   }
 }

@@ -1,6 +1,8 @@
 // Use browser.* if available, otherwise fall back to chrome.*
+let isChrome = false;
 if (typeof browser === 'undefined') {
   var browser = chrome;
+  isChrome = true;
 }
 
 async function main() {
@@ -98,7 +100,11 @@ async function main() {
       menu += '</div>';
     }
     menu += '<div class="commentfacewrapper">';
-    menu += '<div class="commentfacecontainer"></div></div></form></div>';
+    menu += '<div class="commentfacecontainer"></div></div></form>';
+
+    const link = isChrome ? 'https://chromewebstore.google.com/detail/ranime-enhanced/fpgkklfainkaakkgihcfdgeglleogkhc' : 'https://addons.mozilla.org/en-US/firefox/addon/r-anime-enhanced/';
+    menu += `<div>This extension is deprecated and development is moving back to the original extension. Please uninstall this extension and reinstall <a href="${link}">the original extension</a></div>`
+    menu += '</div>';
 
     /*
     ** Create Commentface Input on initialy reply to thread reply field
