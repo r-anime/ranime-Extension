@@ -1,7 +1,4 @@
-// Use browser.* if available, otherwise fall back to chrome.*
-if (typeof browser === 'undefined') {
-  var browser = chrome;
-}
+import {domReady, loadOptions, setOptions} from "./utils.js";
 
 async function main(options) {
   const optionsForm = document.getElementsByClassName('ranimeenhanced-options')[0].getElementsByTagName('form')[0];
@@ -25,7 +22,7 @@ async function main(options) {
     }
     input.addEventListener('change', (e) => {
       optionData.enabled = e.target.checked;
-      browser.storage.sync.set({options: options});
+      setOptions(options);
       for (const i of inputs) {
         i.disabled = !optionData.enabled;
       }
@@ -81,24 +78,6 @@ function getSubOptionInputs(current, input) {
     current = current.parentElement;
   }
   return [];
-}
-
-function domReady() {
-  return new Promise(resolve => {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", resolve);
-    } else {
-      resolve();
-    }
-  });
-}
-
-function loadOptions() {
-  return new Promise(resolve => {
-    browser.storage.sync.get('options', (items) => {
-      resolve(items.options || {});
-    });
-  });
 }
 
 const [options] = await Promise.all([loadOptions(), domReady()]);
