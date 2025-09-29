@@ -28,6 +28,10 @@
     "default_title": "r/anime Enhanced",
     "default_popup": "options.html"
   },
+  "background": {
+    "service_worker": "enhance.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -37,7 +41,7 @@
       ],
       "js": [
         "jquery-3.3.1.min.js",
-        "enhance.js"
+        "legacy.js"
       ],
       "type": "module",
       "css": [
