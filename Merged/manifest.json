@@ -2,7 +2,7 @@
   "description": "Add functionalities to r/anime",
   "manifest_version": 3,
   "name": "r/anime Enhanced",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "permissions": [
     "storage"
   ],
@@ -30,6 +30,7 @@
   },
   "background": {
     "service_worker": "enhance.js",
+    "scripts": ["enhance.js"],
     "type": "module"
   },
   "content_scripts": [
